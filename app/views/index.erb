@@ -1,1 +1,42 @@
-<h1>Home Page</h1>
+<h1>Contact List</h1>
+
+<button id='showNewContactForm'>Create Contact</button>
+
+<div id='createContact' class='is-hidden'>
+<form>
+  <div>
+    <label name='first_name'>
+      <b>First Name</b>
+      <input id='contactFirstName' type='text'>
+    </label>
+  </div>
+
+  <div>
+    <label name='last_name'>
+      <b>Last Name</b>
+      <input id='contactLastName' type='text'>
+    </label>
+  </div>
+
+  <div>
+    <label name='email'>
+      <b>Email</b>
+      <input id='contactEmail' type='text'>
+    </label>
+  </div>
+
+  <div>
+    <label name='phone'>
+      <b>Phone</b>
+      <input id='contactPhone' type='text'>
+    </label>
+  </div>
+
+  <div>
+    <button type='submit' id='create-new-contact'>Create Contact</button>
+  </div>
+</form>
+</div>
+
+<ul id='contacts'>
+</ul>
