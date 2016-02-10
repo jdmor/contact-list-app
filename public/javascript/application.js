@@ -9,16 +9,17 @@ $('#showNewContactForm').on('click', function() {
 
 $('#createContact').on('submit', function() {
 
-  var firstName = $('#contactFirstName').val();
-  var lastName = $('#contactLastName').val();
-  var email = $('#contactEmail').val();
-  var phone = $('#contactPhone').val();
+  var firstName = $('#contactFirstName');
+  var lastName = $('#contactLastName');
+  var email = $('#contactEmail');
+  var phone = $('#contactPhone');
 
   $.post('/api/contacts/new',
-    {first_name: firstName, last_name: lastName, email: email, phone: phone},
+    {first_name: firstName.val(), last_name: lastName.val(), email: email.val(), phone: phone.val()},
     function(response) {
       if (response.result) {
         alert('Yay it worked');
+        firstName.add(lastName).add(email).add(phone).val('');
       } else {
         alert('Didn\'t work :(');
       }
