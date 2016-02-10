@@ -4,6 +4,7 @@ $(function() {
 
 $('#showContacts').on('click', function() {
   $('#contactList').show();
+  $('#createContact').hide();
   $('#contactList tbody').empty();
 
   $.getJSON('/api/contacts', function(contacts) {
@@ -20,6 +21,7 @@ $('#showContacts').on('click', function() {
 
 $('#showNewContactForm').on('click', function() {
   $('#createContact').show();
+  $('#contactList').hide();
 });
 
 $('#createContact').on('submit', function() {
@@ -29,7 +31,7 @@ $('#createContact').on('submit', function() {
   var email = $('#contactEmail').val();
   var phone = $('#contactPhone').val();
 
-  if (firstName == '' || lastName == '') {
+  if (firstName === '' || lastName === '') {
     return false;
   }
 
@@ -37,10 +39,10 @@ $('#createContact').on('submit', function() {
     {first_name: firstName, last_name: lastName, email: email, phone: phone},
     function(response) {
       if (response.result) {
-        alert('Yay it worked');
         $('#contactFirstName').add('#contactLastName').add('#contactEmail').add('#contactPhone').val('');
       } else {
-        alert('Didn\'t work :(');
+        // REFACTOR - Notify user of failed attempt
+        console.log('Failed to create user.')
       }
     }, 'json');
 
