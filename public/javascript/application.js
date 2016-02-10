@@ -39,6 +39,7 @@ var handlers = {
 $('#showContacts').on('click', function() {
   $('#createContact').hide();
   $('#searchContacts').hide();
+  $('#contactDetails').hide();
 
   $.getJSON('/api/contacts', function(contacts) {
     handlers.loadContacts(contacts);
@@ -50,6 +51,7 @@ $('#showNewContactForm').on('click', function() {
   $('#createContact').show();
   $('#contactList').hide();
   $('#searchContacts').hide();
+  $('#contactDetails').hide();
 });
 
 $('#createContact').on('submit', function() {
@@ -81,6 +83,7 @@ $('#showSearchField').on('click', function() {
   $('#searchContacts').show();
   $('#contactList').hide();
   $('#createContact').hide();
+  $('#contactDetails').hide();
 });
 
 $('#searchContacts').on('submit', function() {
