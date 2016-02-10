@@ -9,15 +9,21 @@ var handlers = {
 
     contacts.forEach(function(contact) {
       var tr = $('<tr>').appendTo('#contactList tbody');
+      // var contactID = contact.id.toString();
+      tr.attr('data-contact-id', contact.id.toString());
+
       var fullName = handlers.fullName(contact);
       $('<td>').text(fullName).appendTo(tr);
       $('<td>').text(contact.email).appendTo(tr);
       $('<td>').text(contact.phone).appendTo(tr);
       var viewDetailsButton = $('<button>')
         .text('View')
-        .addClass('js-view-contact')
-        .data('contact-id', contact.id);
-      viewDetailsButton.appendTo('<td>').appendTo(tr);
+        .addClass('js-view-contact');
+      $('<td>').html(viewDetailsButton).appendTo(tr);
+      var deleteContactButton = $('<button>')
+        .text('Delete')
+        .addClass('js-delete-contact');
+      $('<td>').html(deleteContactButton).appendTo(tr);
     });
   },
   loadContactDetails: function(contact) {
@@ -98,7 +104,7 @@ $('#searchContacts').on('submit', function() {
 });
 
 $('#contactList').on('click', '.js-view-contact', function() {
-  var contactID = $(this).data('contact-id');
+  var contactID = $(this).closest('[data-contact-id]').data('contact-id');
   var path = '/api/contacts/' + contactID;
 
   // get contact from db
