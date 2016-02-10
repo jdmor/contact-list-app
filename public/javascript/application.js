@@ -107,9 +107,18 @@ $('#contactList').on('click', '.js-view-contact', function() {
   var contactID = $(this).closest('[data-contact-id]').data('contact-id');
   var path = '/api/contacts/' + contactID;
 
-  // get contact from db
   $.getJSON(path, function(contact) {
     handlers.loadContactDetails(contact);
+  });
+
+});
+
+$('#contactList').on('click', '.js-delete-contact', function() {
+  var contactID = $(this).closest('[data-contact-id]').data('contact-id');
+
+  $.post('/api/contacts', {_method: 'delete', id: contactID},
+    function(response) {
+      console.log(response);
   });
 
 });
