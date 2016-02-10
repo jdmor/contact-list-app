@@ -2,6 +2,20 @@
 
 $(function() {
 
+$('#showContacts').on('click', function() {
+  $('#contactList').show();
+
+  $.getJSON('/api/contacts', function(contacts) {
+    contacts.forEach(function(contact) {
+      var tr = $('<tr>').appendTo('#contactList tbody');
+      var fullName = contact.first_name + contact.last_name;
+      $('<td>').text(fullName).appendTo(tr);
+      $('<td>').text(contact.email).appendTo(tr);
+      $('<td>').text(contact.phone).appendTo(tr);
+    });
+  });
+
+});
 
 $('#showNewContactForm').on('click', function() {
   $('#createContact').show();

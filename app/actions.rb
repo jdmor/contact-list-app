@@ -2,6 +2,10 @@ get '/' do
   erb :index
 end
 
+get '/api/contacts' do
+  Contact.all.to_json
+end
+
 post '/api/contacts/new' do
   results = {result: false}
 
