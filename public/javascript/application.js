@@ -2,12 +2,8 @@
 
 $(function() {
 
-$('#showContacts').on('click', function() {
-  $('#contactList').show();
-  $('#createContact').hide();
-  $('#contactList tbody').empty();
-
-  $.getJSON('/api/contacts', function(contacts) {
+var handlers = {
+  loadContacts: function(contacts) {
     contacts.forEach(function(contact) {
       var tr = $('<tr>').appendTo('#contactList tbody');
       var fullName = contact.first_name + ' ' + contact.last_name;
@@ -15,6 +11,16 @@ $('#showContacts').on('click', function() {
       $('<td>').text(contact.email).appendTo(tr);
       $('<td>').text(contact.phone).appendTo(tr);
     });
+  }
+};
+
+$('#showContacts').on('click', function() {
+  $('#contactList').show();
+  $('#createContact').hide();
+  $('#contactList tbody').empty();
+
+  $.getJSON('/api/contacts', function(contacts) {
+    handlers.loadContacts(contacts);
   });
 
 });
