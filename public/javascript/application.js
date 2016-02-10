@@ -4,6 +4,10 @@ $(function() {
 
 var handlers = {
   loadContacts: function(contacts) {
+    $('#contactList').show();
+    $('#createContact').hide();
+    $('#contactList tbody').empty();
+
     contacts.forEach(function(contact) {
       var tr = $('<tr>').appendTo('#contactList tbody');
       var fullName = contact.first_name + ' ' + contact.last_name;
@@ -15,9 +19,6 @@ var handlers = {
 };
 
 $('#showContacts').on('click', function() {
-  $('#contactList').show();
-  $('#createContact').hide();
-  $('#contactList tbody').empty();
 
   $.getJSON('/api/contacts', function(contacts) {
     handlers.loadContacts(contacts);
@@ -61,7 +62,7 @@ $('#searchContacts').on('submit', function() {
   var path = '/api/contacts?search=' + term;
 
   $.getJSON(path, function(contacts) {
-    console.log(contacts);
+    handlers.loadContacts(contacts);
   });
 
   return false;
