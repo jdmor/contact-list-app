@@ -5,7 +5,6 @@ $(function() {
 var handlers = {
   loadContacts: function(contacts) {
     $('#contactList').show();
-    $('#createContact').hide();
     $('#contactList tbody').empty();
 
     contacts.forEach(function(contact) {
@@ -19,6 +18,8 @@ var handlers = {
 };
 
 $('#showContacts').on('click', function() {
+  $('#createContact').hide();
+  $('#searchContacts').hide();
 
   $.getJSON('/api/contacts', function(contacts) {
     handlers.loadContacts(contacts);
@@ -29,10 +30,10 @@ $('#showContacts').on('click', function() {
 $('#showNewContactForm').on('click', function() {
   $('#createContact').show();
   $('#contactList').hide();
+  $('#searchContacts').hide();
 });
 
 $('#createContact').on('submit', function() {
-
   var firstName = $('#contactFirstName').val();
   var lastName = $('#contactLastName').val();
   var email = $('#contactEmail').val();
@@ -55,6 +56,12 @@ $('#createContact').on('submit', function() {
 
   return false;
 
+});
+
+$('#showSearchField').on('click', function() {
+  $('#searchContacts').show();
+  $('#contactList').hide();
+  $('#createContact').hide();
 });
 
 $('#searchContacts').on('submit', function() {

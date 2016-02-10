@@ -1,7 +1,10 @@
 <h1>Contact List</h1>
 
-<div>
-  <form id='searchContacts'>
+<button id='showSearchField'>Search</button>
+<button id='showContacts'>List Contacts</button>
+<button id='showNewContactForm'>Create Contact</button>
+
+<form id='searchContacts' class='is-hidden'>
     <div>
       <label>
         <input id='searchTerm' type='search'>
@@ -11,11 +14,7 @@
     <div>
       <button type='submit'>Search</button>
     </div>
-  </form>
-</div>
-
-<button id='showContacts'>Show Contacts</button>
-<button id='showNewContactForm'>Create Contact</button>
+</form>
 
 <div id='contactList' class='is-hidden'>
   <table>
@@ -31,7 +30,6 @@
   </table>
 </div>
 
-<div>
 <form id='createContact' class='is-hidden'>
   <div>
     <label name='first_name'>
@@ -62,10 +60,6 @@
   </div>
 
   <div>
-    <button type='submit'>Create Contact</button>
+    <button type='submit'>Create</button>
   </div>
 </form>
-</div>
-
-<ul id='contacts'>
-</ul>
