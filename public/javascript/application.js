@@ -10,7 +10,7 @@ $('#showContacts').on('click', function() {
   $.getJSON('/api/contacts', function(contacts) {
     contacts.forEach(function(contact) {
       var tr = $('<tr>').appendTo('#contactList tbody');
-      var fullName = contact.first_name + contact.last_name;
+      var fullName = contact.first_name + ' ' + contact.last_name;
       $('<td>').text(fullName).appendTo(tr);
       $('<td>').text(contact.email).appendTo(tr);
       $('<td>').text(contact.phone).appendTo(tr);
@@ -42,12 +42,23 @@ $('#createContact').on('submit', function() {
         $('#contactFirstName').add('#contactLastName').add('#contactEmail').add('#contactPhone').val('');
       } else {
         // REFACTOR - Notify user of failed attempt
-        console.log('Failed to create user.')
+        console.log('Failed to create user.');
       }
     }, 'json');
 
   return false;
 
+});
+
+$('#searchContacts').on('submit', function() {
+  var term = $('#searchTerm').val();
+  var path = '/api/contacts?search=' + term;
+
+  $.getJSON(path, function(contacts) {
+    console.log(contacts);
+  });
+
+  return false;
 });
 
 });

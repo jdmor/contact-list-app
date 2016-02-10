@@ -3,7 +3,13 @@ get '/' do
 end
 
 get '/api/contacts' do
-  Contact.all.to_json
+  contacts = Contact.all
+
+  if params[:search]
+    contacts = contacts.search_by_name(params[:search])
+  end
+
+  contacts.to_json
 end
 
 post '/api/contacts/new' do
