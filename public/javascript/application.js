@@ -117,8 +117,17 @@ $('#contactList').on('click', '.js-delete-contact', function() {
   var contactID = $(this).closest('[data-contact-id]').data('contact-id');
 
   $.post('/api/contacts', {_method: 'delete', id: contactID},
-    function(response) {
-      console.log(response);
+    function(contact) {
+      console.log(contact);
+      // ISSUE: Why doesn't the function return an object?
+      // if (contact.deleted) {
+        $.getJSON('/api/contacts', function(contacts) {
+          handlers.loadContacts(contacts);
+        });
+      // } else {
+        // REFACTOR
+        // console.log('Contact not deleted.');
+      // }
   });
 
 });

@@ -32,3 +32,10 @@ post '/api/contacts/new' do
   end
   results.to_json
 end
+
+delete '/api/contacts' do
+  Contact.find_by(id: params[:id]).destroy
+  contact = {deleted: true}
+  p contact
+  contact.to_json
+end
