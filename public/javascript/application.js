@@ -9,17 +9,21 @@ $('#showNewContactForm').on('click', function() {
 
 $('#createContact').on('submit', function() {
 
-  var firstName = $('#contactFirstName');
-  var lastName = $('#contactLastName');
-  var email = $('#contactEmail');
-  var phone = $('#contactPhone');
+  var firstName = $('#contactFirstName').val();
+  var lastName = $('#contactLastName').val();
+  var email = $('#contactEmail').val();
+  var phone = $('#contactPhone').val();
+
+  if (firstName == '' || lastName == '') {
+    return false;
+  }
 
   $.post('/api/contacts/new',
-    {first_name: firstName.val(), last_name: lastName.val(), email: email.val(), phone: phone.val()},
+    {first_name: firstName, last_name: lastName, email: email, phone: phone},
     function(response) {
       if (response.result) {
         alert('Yay it worked');
-        firstName.add(lastName).add(email).add(phone).val('');
+        $('#contactFirstName').add('#contactLastName').add('#contactEmail').add('#contactPhone').val('');
       } else {
         alert('Didn\'t work :(');
       }
