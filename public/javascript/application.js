@@ -4,6 +4,7 @@ $(function() {
 
 $('#showContacts').on('click', function() {
   $('#contactList').show();
+  $('#contactList tbody').empty();
 
   $.getJSON('/api/contacts', function(contacts) {
     contacts.forEach(function(contact) {
