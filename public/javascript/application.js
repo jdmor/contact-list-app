@@ -9,11 +9,30 @@ var handlers = {
 
     contacts.forEach(function(contact) {
       var tr = $('<tr>').appendTo('#contactList tbody');
-      var fullName = contact.first_name + ' ' + contact.last_name;
+      var fullName = handlers.fullName(contact);
       $('<td>').text(fullName).appendTo(tr);
       $('<td>').text(contact.email).appendTo(tr);
       $('<td>').text(contact.phone).appendTo(tr);
+      var viewDetailsButton = $('<button>')
+        .text('View')
+        .addClass('js-view-contact')
+        .data('contact-id', contact.id);
+      viewDetailsButton.appendTo('<td>').appendTo(tr);
     });
+  },
+  loadContactDetails: function(contact) {
+    $('#contactList').hide();
+    var contactDetails = $('#contactDetails');
+    contactDetails.empty();
+    contactDetails.show();
+    var fullName = handlers.fullName(contact);
+
+    $('<p>').text(fullName).appendTo(contactDetails);
+    $('<p>').text(contact.email).appendTo(contactDetails);
+    $('<p>').text(contact.phone).appendTo(contactDetails);
+  },
+  fullName: function(contact) {
+    return contact.first_name + ' ' + contact.last_name;
   }
 };
 
@@ -73,6 +92,17 @@ $('#searchContacts').on('submit', function() {
   });
 
   return false;
+});
+
+$('#contactList').on('click', '.js-view-contact', function() {
+  var contactID = $(this).data('contact-id');
+  var path = '/api/contacts/' + contactID;
+
+  // get contact from db
+  $.getJSON(path, function(contact) {
+    handlers.loadContactDetails(contact);
+  });
+
 });
 
 });

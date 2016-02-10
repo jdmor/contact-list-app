@@ -12,6 +12,11 @@ get '/api/contacts' do
   contacts.to_json
 end
 
+get '/api/contacts/:id' do
+  p params
+  Contact.find_by(id: params[:id]).to_json
+end
+
 post '/api/contacts/new' do
   results = {result: false}
 
